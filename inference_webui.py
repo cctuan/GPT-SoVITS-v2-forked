@@ -343,6 +343,20 @@ def merge_short_text_in_array(texts, threshold):
 cache= {}
 def get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language, how_to_cut=i18n("不切"), top_k=20, top_p=0.6, temperature=0.6, ref_free = False,speed=1,if_freeze=False,inp_refs=123):
     global cache
+
+    import psutil
+
+    # 获取内存信息
+    memory_info = psutil.virtual_memory()
+
+    # 打印总内存和剩余内存
+    total_memory = memory_info.total / (1024 ** 3)  # 转换为 GB
+    available_memory = memory_info.available / (1024 ** 3)  # 转换为 GB
+
+    print(f"总内存: {total_memory:.2f} GB")
+    print(f"剩余内存: {available_memory:.2f} GB")
+
+
     try:
         if ref_wav_path:pass
         else:gr.Warning(i18n('请上传参考音频'))
