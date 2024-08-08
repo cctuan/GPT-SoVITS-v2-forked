@@ -1,13 +1,15 @@
 ---
 title: GPT SoVITS V2
-emoji: 🦀
+emoji: 🤗
 colorFrom: indigo
 colorTo: red
 sdk: gradio
-sdk_version: 4.40.0
-app_file: app.py
+sdk_version: 3.38.0
+app_file: inference_webui.py
 pinned: false
 license: mit
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+GPT-SoVITS-v2 Zero-shot TTS demo
+
+Input 3~10s reference audio to guide the time-bre, speed, emotion of voice, and generate the speech you want by input the inference text.
