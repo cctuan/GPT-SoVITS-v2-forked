@@ -146,7 +146,6 @@ safetensors==0.4.0
 scikit-learn==1.3.2
 scipy==1.11.3
 sentencepiece==0.1.99
-setuptools==51.0.0.post20201207
 simplejson==3.19.2
 six==1.15.0
 sniffio==1.3.0
