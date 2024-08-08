@@ -8,6 +8,7 @@ sdk_version: 3.38.0
 app_file: inference_webui.py
 pinned: false
 license: mit
+python_version: 3.9.1
 ---
 
 GPT-SoVITS-v2 Zero-shot TTS demo
