@@ -20,17 +20,21 @@ class G2PWPinyin(Pinyin):
     def __init__(self, model_dir='G2PWModel/', model_source=None,
                  enable_non_tradional_chinese=True,
                  v_to_u=False, neutral_tone_with_five=False, tone_sandhi=False, **kwargs):
+
+        print("::3")
         self._g2pw = G2PWOnnxConverter(
             model_dir=model_dir,
             style='pinyin',
             model_source=model_source,
             enable_non_tradional_chinese=enable_non_tradional_chinese,
         )
+        print("::4")
         self._converter = Converter(
             self._g2pw, v_to_u=v_to_u,
             neutral_tone_with_five=neutral_tone_with_five,
             tone_sandhi=tone_sandhi,
         )
+        print("::5")
 
     def get_seg(self, **kwargs):
         return simple_seg
