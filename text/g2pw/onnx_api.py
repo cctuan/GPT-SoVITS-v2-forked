@@ -81,25 +81,29 @@ class G2PWOnnxConverter:
                  model_source: str=None,
                  enable_non_tradional_chinese: bool=False):
         uncompress_path = download_and_decompress(model_dir)
-
+        print(":::1")
         sess_options = onnxruntime.SessionOptions()
+        print(":::2")
         sess_options.graph_optimization_level = onnxruntime.GraphOptimizationLevel.ORT_ENABLE_ALL
+        print(":::3")
         sess_options.execution_mode = onnxruntime.ExecutionMode.ORT_SEQUENTIAL
+        print(":::4")
         sess_options.intra_op_num_threads = 2
+        print(":::5")
         try:
             self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'),sess_options=sess_options, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
         except:
             self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'),sess_options=sess_options, providers=['CPUExecutionProvider'])
-
+        print(":::6")
         self.config = load_config(
             config_path=os.path.join(uncompress_path, 'config.py'),
             use_default=True)
 
         self.model_source = model_source if model_source else self.config.model_source
         self.enable_opencc = enable_non_tradional_chinese
-
+        print(":::7")
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_source)
-
+        print(":::8")
         polyphonic_chars_path = os.path.join(uncompress_path,
                                              'POLYPHONIC_CHARS.txt')
         monophonic_chars_path = os.path.join(uncompress_path,
@@ -123,14 +127,14 @@ class G2PWOnnxConverter:
             polyphonic_chars=self.polyphonic_chars
         ) if self.config.use_char_phoneme else get_phoneme_labels(
             polyphonic_chars=self.polyphonic_chars)
-
+        print(":::9")
         self.chars = sorted(list(self.char2phonemes.keys()))
 
         self.polyphonic_chars_new = set(self.chars)
         for char in self.non_polyphonic:
             if char in self.polyphonic_chars_new:
                 self.polyphonic_chars_new.remove(char)
-
+        print(":::10")
         self.monophonic_chars_dict = {
             char: phoneme
             for char, phoneme in self.monophonic_chars
@@ -138,11 +142,11 @@ class G2PWOnnxConverter:
         for char in self.non_monophonic:
             if char in self.monophonic_chars_dict:
                 self.monophonic_chars_dict.pop(char)
-
+        print(":::11")
         self.pos_tags = [
             'UNK', 'A', 'C', 'D', 'I', 'N', 'P', 'T', 'V', 'DE', 'SHI'
         ]
-
+        print(":::12")
         with open(
                 os.path.join(uncompress_path,
                              'bopomofo_to_pinyin_wo_tune_dict.json'),
@@ -153,16 +157,16 @@ class G2PWOnnxConverter:
             'bopomofo': lambda x: x,
             'pinyin': self._convert_bopomofo_to_pinyin,
         }[style]
-
+        print(":::13")
         with open(
                 os.path.join(uncompress_path, 'char_bopomofo_dict.json'),
                 'r',
                 encoding='utf-8') as fr:
             self.char_bopomofo_dict = json.load(fr)
-
+        print(":::14")
         if self.enable_opencc:
             self.cc = OpenCC('s2tw')
-
+        print(":::15")
     def _convert_bopomofo_to_pinyin(self, bopomofo: str) -> str:
         tone = bopomofo[-1]
         assert tone in '12345'
