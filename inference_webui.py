@@ -424,19 +424,24 @@ def get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language,
         print(i18n("实际输入的目标文本(切句后):"), text)
         texts = text.split("\n")
         texts = process_text(texts)
+        print(2)
         texts = merge_short_text_in_array(texts, 5)
+        print(3)
         audio_opt = []
         if not ref_free:
             phones1,bert1,norm_text1=get_phones_and_bert(prompt_text, prompt_language, version)
-
+        print(4)
         for i_text,text in enumerate(texts):
             # 解决输入目标文本的空行导致报错的问题
             if (len(text.strip()) == 0):
                 continue
+            print(5)
             if (text[-1] not in splits): text += "。" if text_language != "en" else "."
             print(i18n("实际输入的目标文本(每句):"), text)
+            print(6)
             phones2,bert2,norm_text2=get_phones_and_bert(text, text_language, version)
             print(i18n("前端处理后的文本(每句):"), norm_text2)
+            print(7)
             if not ref_free:
                 bert = torch.cat([bert1, bert2], 1)
                 all_phoneme_ids = torch.LongTensor(phones1+phones2).to(device).unsqueeze(0)
