@@ -29,7 +29,6 @@ if is_g2pw:
     parent_directory = os.path.dirname(current_file_path)
     g2pw = G2PWPinyin(model_dir="text/G2PWModel",model_source="pretrained_models/chinese-roberta-wwm-ext-large",v_to_u=False, neutral_tone_with_five=True)
 
-print("::1")
 rep_map = {
     "：": ",",
     "；": ",",
@@ -49,7 +48,7 @@ rep_map = {
 }
 
 tone_modifier = ToneSandhi()
-print("::2")
+
 
 def replace_punctuation(text):
     text = text.replace("嗯", "恩").replace("呣", "母")
