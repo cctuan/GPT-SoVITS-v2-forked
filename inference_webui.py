@@ -253,6 +253,7 @@ def get_first(text):
 from text import chinese
 def get_phones_and_bert(text,language,version):
     if language in {"en", "all_zh", "all_ja", "all_ko", "all_yue"}:
+        print(":1")
         language = language.replace("all_","")
         if language == "en":
             LangSegment.setfilters(["en"])
@@ -263,27 +264,39 @@ def get_phones_and_bert(text,language,version):
         while "  " in formattext:
             formattext = formattext.replace("  ", " ")
         if language == "zh":
+            print(":2")
             if re.search(r'[A-Za-z]', formattext):
+                print(":3")
                 formattext = re.sub(r'[a-z]', lambda x: x.group(0).upper(), formattext)
                 formattext = chinese.mix_text_normalize(formattext)
+                print(":4")
                 return get_phones_and_bert(formattext,"zh",version)
             else:
+                print(":5")
                 phones, word2ph, norm_text = clean_text_inf(formattext, language, version)
+                print(":6")
                 bert = get_bert_feature(norm_text, word2ph).to(device)
+                print(":7")
         elif language == "yue" and re.search(r'[A-Za-z]', formattext):
                 formattext = re.sub(r'[a-z]', lambda x: x.group(0).upper(), formattext)
                 formattext = chinese.mix_text_normalize(formattext)
+                print(":8")
                 return get_phones_and_bert(formattext,"yue",version)
         else:
+            print(":9")
             phones, word2ph, norm_text = clean_text_inf(formattext, language, version)
+            print(":10")
             bert = torch.zeros(
                 (1024, len(phones)),
                 dtype=torch.float16 if is_half == True else torch.float32,
             ).to(device)
+            print(":11")
     elif language in {"zh", "ja", "ko", "yue", "auto", "auto_yue"}:
         textlist=[]
         langlist=[]
+        print(":12")
         LangSegment.setfilters(["zh","ja","en","ko"])
+        print(":13")
         if language == "auto":
             for tmp in LangSegment.getTexts(text):
                 langlist.append(tmp["lang"])
