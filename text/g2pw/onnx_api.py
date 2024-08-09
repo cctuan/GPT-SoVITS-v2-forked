@@ -90,10 +90,7 @@ class G2PWOnnxConverter:
         print(":::4")
         sess_options.intra_op_num_threads = 2
         print(":::5")
-        try:
-            self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'),sess_options=sess_options, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
-        except:
-            self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'),sess_options=sess_options, providers=['CPUExecutionProvider'])
+        self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'),sess_options=sess_options, providers=['CPUExecutionProvider'])
         print(":::6")
         self.config = load_config(
             config_path=os.path.join(uncompress_path, 'config.py'),
