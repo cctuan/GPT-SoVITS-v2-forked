@@ -19,6 +19,7 @@ logging.getLogger("torchaudio._extension").setLevel(logging.ERROR)
 logging.getLogger("multipart.multipart").setLevel(logging.ERROR)
 import LangSegment, os, re, sys, json
 import pdb
+import spaces
 import torch
 
 version="v2"#os.environ.get("version","v2")
@@ -341,6 +342,8 @@ def merge_short_text_in_array(texts, threshold):
 ##ref_wav_path+prompt_text+prompt_language+text(单个)+text_language+top_k+top_p+temperature
 # cache_tokens={}#暂未实现清理机制
 cache= {}
+@torch.inference_mode()
+@spaces.GPU
 def get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language, how_to_cut=i18n("不切"), top_k=20, top_p=0.6, temperature=0.6, ref_free = False,speed=1,if_freeze=False,inp_refs=123):
     global cache
     if ref_wav_path:pass
@@ -606,7 +609,15 @@ def html_left(text, label='p'):
 
 with gr.Blocks(title="GPT-SoVITS WebUI") as app:
     gr.Markdown(
-        value=i18n("本软件以MIT协议开源, 作者不对软件具备任何控制力, 使用软件者、传播软件导出的声音者自负全责. <br>如不认可该条款, 则不能使用或引用软件包内任何代码和文件. 详见根目录<b>LICENSE</b>.")
+        value="""# GPT-SoVITS-v2 Zero-shot TTS demo
+## https://github.com/RVC-Boss/GPT-SoVITS
+Input 3~10s reference audio to guide the time-bre, speed, emotion of voice, and generate the speech you want by input the inference text. 
+输入3~10秒的参考音频来引导待合成语音的音色、语速和情感，然后输入待合成目标文本，生成目标语音. 
+Cross-lingual Support: Inference in languages different from the training dataset, currently supporting English, Japanese, Korean and Cantonese.
+目前支持中日英韩粤跨语种合成。
+This demo is open source under the MIT license. The author does not have any control over it. Users who use the software and distribute the sounds exported by the software are solely responsible. If you do not agree with this clause, you cannot use or reference any codes and files within this demo. 
+本demo以MIT协议开源, 作者不对软件具备任何控制力, 使用软件者、传播软件导出的声音者自负全责. 如不认可该条款, 则不能使用或引用该demo内的任何代码和文件.
+""")
     )
     with gr.Group():
         gr.Markdown(html_center(i18n("*请上传并填写参考信息"),'h3'))
