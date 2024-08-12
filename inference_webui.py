@@ -617,7 +617,7 @@ Cross-lingual Support: Inference in languages different from the training datase
 目前支持中日英韩粤跨语种合成。
 This demo is open source under the MIT license. The author does not have any control over it. Users who use the software and distribute the sounds exported by the software are solely responsible. If you do not agree with this clause, you cannot use or reference any codes and files within this demo. 
 本demo以MIT协议开源, 作者不对软件具备任何控制力, 使用软件者、传播软件导出的声音者自负全责. 如不认可该条款, 则不能使用或引用该demo内的任何代码和文件.
-""")
+"""
     )
     with gr.Group():
         gr.Markdown(html_center(i18n("*请上传并填写参考信息"),'h3'))
