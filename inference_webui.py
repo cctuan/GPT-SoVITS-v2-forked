@@ -611,11 +611,11 @@ with gr.Blocks(title="GPT-SoVITS WebUI") as app:
     gr.Markdown(
         value="""# GPT-SoVITS-v2 Zero-shot TTS demo
 ## https://github.com/RVC-Boss/GPT-SoVITS
-Input 3~10s reference audio to guide the time-bre, speed, emotion of voice, and generate the speech you want by input the inference text. 
-输入3~10秒的参考音频来引导待合成语音的音色、语速和情感，然后输入待合成目标文本，生成目标语音. 
-Cross-lingual Support: Inference in languages different from the training dataset, currently supporting English, Japanese, Korean and Cantonese.
-目前支持中日英韩粤跨语种合成。
-This demo is open source under the MIT license. The author does not have any control over it. Users who use the software and distribute the sounds exported by the software are solely responsible. If you do not agree with this clause, you cannot use or reference any codes and files within this demo. 
+Input 3~10s reference audio to guide the time-bre, speed, emotion of voice, and generate the speech you want by input the inference text. <br>
+输入3~10秒的参考音频来引导待合成语音的音色、语速和情感，然后输入待合成目标文本，生成目标语音. <br>
+Cross-lingual Support: Inference in languages different from the training dataset, currently supporting English, Japanese, Korean and Cantonese.<br>
+目前支持中日英韩粤跨语种合成。<br>
+This demo is open source under the MIT license. The author does not have any control over it. Users who use the software and distribute the sounds exported by the software are solely responsible. If you do not agree with this clause, you cannot use or reference any codes and files within this demo. <br>
 本demo以MIT协议开源, 作者不对软件具备任何控制力, 使用软件者、传播软件导出的声音者自负全责. 如不认可该条款, 则不能使用或引用该demo内的任何代码和文件.
 """
     )
