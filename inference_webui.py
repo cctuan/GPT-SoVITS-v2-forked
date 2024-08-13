@@ -22,7 +22,7 @@ analytics.version_check = lambda:None
 analytics.get_local_ip_address= lambda :"127.0.0.1"##不干掉本地联不通亚马逊的get_local_ip服务器
 import LangSegment, os, re, sys, json
 import pdb
-# import spaces
+import spaces
 import torch
 
 version="v2"#os.environ.get("version","v2")
@@ -346,7 +346,7 @@ def merge_short_text_in_array(texts, threshold):
 # cache_tokens={}#暂未实现清理机制
 cache= {}
 @torch.inference_mode()
-# @spaces.GPU
+@spaces.GPU
 def get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language, how_to_cut=i18n("不切"), top_k=20, top_p=0.6, temperature=0.6, ref_free = False,speed=1,if_freeze=False,inp_refs=123):
     global cache
     if ref_wav_path:pass
