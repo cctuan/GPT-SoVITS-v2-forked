@@ -12,7 +12,7 @@ cn2an==0.5.22
 pypinyin==0.50.0
 pyopenjtalk==0.3.3
 g2p_en==2.1.0
-torchaudio==2.0.2
+torchaudio==2.1.2
 sentencepiece==0.1.99
 transformers==4.35.0
 chardet==3.0.4
