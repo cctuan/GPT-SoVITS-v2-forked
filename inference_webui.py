@@ -20,6 +20,8 @@ logging.getLogger("multipart.multipart").setLevel(logging.ERROR)
 import gradio.analytics as analytics
 analytics.version_check = lambda:None
 analytics.get_local_ip_address= lambda :"127.0.0.1"##不干掉本地联不通亚马逊的get_local_ip服务器
+import nltk
+nltk.download('averaged_perceptron_tagger_eng')
 import LangSegment, os, re, sys, json
 import pdb
 import spaces
