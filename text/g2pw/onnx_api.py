@@ -86,7 +86,8 @@ class G2PWOnnxConverter:
         sess_options.graph_optimization_level = onnxruntime.GraphOptimizationLevel.ORT_ENABLE_ALL
         sess_options.execution_mode = onnxruntime.ExecutionMode.ORT_SEQUENTIAL
         sess_options.intra_op_num_threads = 2
-        self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'), sess_options=sess_options, providers=['CPUExecutionProvider'])
+        # self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'), sess_options=sess_options, providers=['CPUExecutionProvider'])
+        self.session_g2pW = onnxruntime.InferenceSession(os.path.join(uncompress_path, 'g2pW.onnx'), sess_options=sess_options, providers=['CUDAExecutionProvider','CPUExecutionProvider'])
 
         self.config = load_config(
             config_path=os.path.join(uncompress_path, 'config.py'),

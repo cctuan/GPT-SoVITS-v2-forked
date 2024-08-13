@@ -17,9 +17,12 @@ logging.getLogger("asyncio").setLevel(logging.ERROR)
 logging.getLogger("charset_normalizer").setLevel(logging.ERROR)
 logging.getLogger("torchaudio._extension").setLevel(logging.ERROR)
 logging.getLogger("multipart.multipart").setLevel(logging.ERROR)
+import gradio.analytics as analytics
+analytics.version_check = lambda:None
+analytics.get_local_ip_address= lambda :"127.0.0.1"##不干掉本地联不通亚马逊的get_local_ip服务器
 import LangSegment, os, re, sys, json
 import pdb
-import spaces
+# import spaces
 import torch
 
 version="v2"#os.environ.get("version","v2")
@@ -343,7 +346,7 @@ def merge_short_text_in_array(texts, threshold):
 # cache_tokens={}#暂未实现清理机制
 cache= {}
 @torch.inference_mode()
-@spaces.GPU
+# @spaces.GPU
 def get_tts_wav(ref_wav_path, prompt_text, prompt_language, text, text_language, how_to_cut=i18n("不切"), top_k=20, top_p=0.6, temperature=0.6, ref_free = False,speed=1,if_freeze=False,inp_refs=123):
     global cache
     if ref_wav_path:pass
@@ -611,8 +614,8 @@ with gr.Blocks(title="GPT-SoVITS WebUI") as app:
     gr.Markdown(
         value="""# GPT-SoVITS-v2 Zero-shot TTS demo
 ## https://github.com/RVC-Boss/GPT-SoVITS
-Input 3~10s reference audio to guide the time-bre, speed, emotion of voice, and generate the speech you want by input the inference text. <br>
-输入3~10秒的参考音频来引导待合成语音的音色、语速和情感，然后输入待合成目标文本，生成目标语音. <br>
+Input 3 to 10s reference audio to guide the time-bre, speed, emotion of voice, and generate the speech you want by input the inference text. <br>
+输入3至10秒的参考音频来引导待合成语音的音色、语速和情感，然后输入待合成目标文本，生成目标语音. <br>
 Cross-lingual Support: Inference in languages different from the training dataset, currently supporting English, Japanese, Korean and Cantonese.<br>
 目前支持中日英韩粤跨语种合成。<br>
 This demo is open source under the MIT license. The author does not have any control over it. Users who use the software and distribute the sounds exported by the software are solely responsible. If you do not agree with this clause, you cannot use or reference any codes and files within this demo. <br>
@@ -630,7 +633,7 @@ This demo is open source under the MIT license. The author does not have any con
             prompt_language = gr.Dropdown(
                 label=i18n("参考音频的语种"), choices=list(dict_language.keys()), value=i18n("中文")
             )
-            inp_refs = gr.File(label=i18n("可选项：通过拖拽多个文件上传多个参考音频（建议同性），平均融合他们的音色。如不填写此项，音色由左侧单个参考音频控制。"),file_count="file_count")
+            inp_refs = gr.File(label=i18n("可选项：通过拖拽多个文件上传多个参考音频（建议同性），平均融合他们的音色。如不填写此项，音色由左侧单个参考音频控制。"),file_count="multiple")
         gr.Markdown(html_center(i18n("*请填写需要合成的目标文本和语种模式"),'h3'))
         with gr.Row():
             with gr.Column():
@@ -663,7 +666,8 @@ This demo is open source under the MIT license. The author does not have any con
         )
 
 if __name__ == '__main__':
-    app.queue(concurrency_count=511, max_size=1022).launch(
+    # app.queue(concurrency_count=511, max_size=1022).launch(
+    app.queue().launch(
         server_name="0.0.0.0",
         inbrowser=True,
         # share=True,

@@ -4,7 +4,7 @@ emoji: 🤗
 colorFrom: indigo
 colorTo: red
 sdk: gradio
-sdk_version: 3.14.0
+sdk_version: 4.24.0
 app_file: inference_webui.py
 pinned: false
 license: mit
