@@ -14,7 +14,8 @@ pyopenjtalk
 g2p_en
 torchaudio==2.1.0
 sentencepiece
-transformers
+transformers>=4.35.0
+huggingface_hub>=0.19.0
 chardet
 PyYAML
 psutil
