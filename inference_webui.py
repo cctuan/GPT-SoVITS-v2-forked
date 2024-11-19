@@ -671,8 +671,8 @@ if __name__ == '__main__':
     # app.queue(concurrency_count=511, max_size=1022).launch(
     app.queue().launch(
         server_name="0.0.0.0",
-        inbrowser=True,
-        # share=True,
+        inbrowser=False,
+        share=True,
         # server_port=infer_ttswebui,
         quiet=True,
     )
