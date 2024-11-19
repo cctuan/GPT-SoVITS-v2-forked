@@ -4,7 +4,7 @@ tensorboard
 librosa
 numba
 pytorch-lightning
-gradio==4.4.0
+gradio==3.35.2
 ffmpeg-python
 onnxruntime-gpu
 tqdm
@@ -12,7 +12,7 @@ cn2an
 pypinyin
 pyopenjtalk
 g2p_en
-torchaudio
+torchaudio==2.1.0
 sentencepiece
 transformers
 chardet
@@ -29,5 +29,7 @@ g2pk2
 ko_pron
 opencc
 python_mecab_ko
-torch
-pydantic==1.10.13
+torch==2.1.0
+torchvision==0.16.0
+pydantic==1.10.8
+fastapi==0.95.2
