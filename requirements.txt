@@ -4,7 +4,7 @@ tensorboard
 librosa
 numba
 pytorch-lightning
-gradio
+gradio==4.4.0
 ffmpeg-python
 onnxruntime-gpu
 tqdm
@@ -30,3 +30,4 @@ ko_pron
 opencc
 python_mecab_ko
 torch
+pydantic==1.10.13
